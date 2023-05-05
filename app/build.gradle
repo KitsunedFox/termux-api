@@ -65,7 +65,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
 
     // Do not bump androidx.biometric:biometric to any version higher than 1.2.0-alpha04 because the app is compiled for sdk 32 (A12L), and it requires sdk 33 (A13).
     implementation 'androidx.biometric:biometric:1.2.0-alpha04'
