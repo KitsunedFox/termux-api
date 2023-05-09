@@ -22,7 +22,7 @@ android {
     }
 
     signingConfigs {
-        debug {
+        default {
             storeFile file('testkey_untrusted.jks')
             keyAlias 'alias'
             storePassword 'xrj45yWGLbsO7W0v'
@@ -33,12 +33,13 @@ android {
     buildTypes {
         release {
             minifyEnabled true
+            signingConfig signingConfigs.default
             shrinkResources false // Reproducible builds
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
 
         debug {
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.default
         }
     }
 
