@@ -23,10 +23,6 @@ public class BatteryStatusAPI {
             public void writeJson(JsonWriter out) throws Exception {
                 Intent batteryStatus = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
-                int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-                int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-                final int batteryPercentage = (level * 100) / scale;
-
                 int health = batteryStatus.getIntExtra(BatteryManager.EXTRA_HEALTH, -1);
                 String batteryHealth;
                 switch (health) {
@@ -108,12 +104,13 @@ public class BatteryStatusAPI {
 
                 out.beginObject();
                 out.name("health").value(batteryHealth);
-                out.name("percentage").value(batteryPercentage);
+                out.name("percentage").value(batteryManager.getLongProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY));
                 out.name("plugged").value(batteryPlugged);
                 out.name("status").value(batteryStatusString);
                 out.name("temperature").value(batteryTemperature);
                 out.name("voltage").value(voltage); // Add voltage information to JSON output
                 out.name("current").value(batteryManager.getLongProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW));
+                out.name("charge").value(batteryManager.getLongProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER));
                 out.endObject();
             }
         });
