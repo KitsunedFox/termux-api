@@ -72,7 +72,7 @@ dependencies {
 
     // Do not bump androidx.biometric:biometric to any version higher than 1.2.0-alpha04 because the app is compiled for sdk 32 (A12L), and it requires sdk 33 (A13).
     implementation 'androidx.biometric:biometric:1.2.0-alpha04'
-    implementation 'androidx.media:media:1.6.0'
+    implementation 'androidx.media:media:1.7.0'
 
     implementation 'com.github.HardcodedCat.termux-monet:termux-shared:0.118.0-33'
     // Use if below libraries are published locally by termux-app with `./gradlew publishReleasePublicationToMavenLocal` and used with `mavenLocal()`.
