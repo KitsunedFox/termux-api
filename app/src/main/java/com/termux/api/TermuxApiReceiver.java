@@ -12,6 +12,7 @@ import com.termux.api.apis.CronAPI;
 import com.termux.api.apis.AdbWifiAPI;
 import com.termux.api.apis.AudioAPI;
 import com.termux.api.apis.BatteryStatusAPI;
+import com.termux.api.apis.BluetoothScanAPI;
 import com.termux.api.apis.BrightnessAPI;
 import com.termux.api.apis.CallLogAPI;
 import com.termux.api.apis.CameraInfoAPI;
@@ -96,6 +97,11 @@ public class TermuxApiReceiver extends BroadcastReceiver {
                 break;
             case "BatteryStatus":
                 BatteryStatusAPI.onReceive(this, context, intent);
+                break;
+            case "BluetoothScan":
+                if (TermuxApiPermissionActivity.checkAndRequestPermissions(context, intent, Manifest.permission.BLUETOOTH_ADMIN, Manifest.permission.BLUETOOTH, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    BluetoothScanAPI.onReceive(context, intent);
+                }
                 break;
             case "Brightness":
                 if (!Settings.System.canWrite(context)) {
