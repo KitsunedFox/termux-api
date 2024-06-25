@@ -16,6 +16,12 @@ jobs:
         with:
           ref: ${{ env.GITHUB_REF }}
 
+      - name: Setup java 17 as required by gradle
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
       - name: Build and attach APK to release
         shell: bash {0}
         run: |
