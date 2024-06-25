@@ -1,4 +1,4 @@
-name: Attach APK To Release
+name: Attach Debug APKsTo Release
 
 on:
   release:
@@ -39,13 +39,13 @@ jobs:
             exit_on_error "The versionName '${RELEASE_VERSION_NAME/v/}' is not a valid version as per semantic version '2.0.0' spec in the format 'major.minor.patch(-prerelease)(+buildmetadata)'. https://semver.org/spec/v2.0.0.html."
           fi
 
-          APK_DIR_PATH="./app/build/outputs/apk/release"
-          APK_VERSION_TAG="$RELEASE_VERSION_NAME+github-release"
+          APK_DIR_PATH="./app/build/outputs/apk/debug"
+          APK_VERSION_TAG="$RELEASE_VERSION_NAME+github-debug"
           APK_BASENAME_PREFIX="termux-api_$APK_VERSION_TAG"
 
           echo "Building APK for '$RELEASE_VERSION_NAME' release"
           export TERMUX_API_APK_VERSION_TAG="$APK_VERSION_TAG" # Used by app/build.gradle
-          if ! ./gradlew assembleRelease; then
+          if ! ./gradlew assembleDebug; then
             exit_on_error "Build failed for '$RELEASE_VERSION_NAME' release."
           fi
 
